@@ -16,9 +16,12 @@ class CreateKelurahansTable extends Migration
         Schema::create('kelurahans', function (Blueprint $table) {
             $table->id();
             $table->string("nama_kelurahan");
-            $table->bigInteger("lurah_id");
-            $table->bigInteger("sekretaris_id");
+            $table->unsignedBigInteger("lurah_id");
+            $table->unsignedBigInteger("sekretaris_id");
             $table->timestamps();
+
+            $table->foreign("lurah_id")->references("id")->on("penduduks");
+            $table->foreign("sekretaris_id")->references("id")->on("penduduks");
         });
     }
 

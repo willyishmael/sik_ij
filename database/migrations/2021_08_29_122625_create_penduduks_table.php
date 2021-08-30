@@ -16,16 +16,19 @@ class CreatePenduduksTable extends Migration
         Schema::create('penduduks', function (Blueprint $table) {
             $table->id();
             $table->string("nama");
-            $table->string("alamat");
+            $table->unsignedBigInteger('rumah_id');
             $table->string("tempat_lahir");
             $table->date("tanggal_lahir");
-            $table->string("nik");
-            $table->string("no_telp");
-            $table->string("email");
+            $table->string("nik")->unique();
+            $table->string("no_telp")->unique();
+            $table->string("email")->unique();
             $table->boolean("jenis_kelamin");
             $table->string("status_pernikahan");
-            $table->bigInteger("kepala_keluarga_id");
+            $table->unsignedBigInteger("kepala_keluarga_id");
             $table->timestamps();
+
+            $table->foreign("rumah_id")->references("id")->on("rumahs");
+            $table->foreign("kepala_keluarga_id")->references("id")->on("penduduks");
         });
     }
 
