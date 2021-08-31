@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Rumah extends Model
 {
     use HasFactory;
+
+    public function penghuni() {
+        $this->hasMany(Penduduk::class, 'rumah_id', 'id');
+    }
+
+    public function pemilik() {
+        $this->belongsTo(Pemilik::class, 'pemilik_id', 'id');
+    }
 }

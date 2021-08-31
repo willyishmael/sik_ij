@@ -15,7 +15,8 @@ class CreatePemiliksTable extends Migration
     {
         Schema::create('pemiliks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("penduduk_id");
+            $table->string("nama");
+            $table->string("nik");
             $table->timestamps();
         });
     }

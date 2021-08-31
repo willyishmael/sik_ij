@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Pemilik extends Model
 {
     use HasFactory;
+
+    public function rumah() {
+        $this->hasMany(Rumah::class, 'pemilik_id', 'id');
+    }
 }
