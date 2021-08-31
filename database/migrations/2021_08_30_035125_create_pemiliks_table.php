@@ -15,10 +15,8 @@ class CreatePemiliksTable extends Migration
     {
         Schema::create('pemiliks', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("penduduk_id");
+            $table->foreignId("penduduk_id");
             $table->timestamps();
-            
-            $table->foreign("penduduk_id")->references("id")->on("penduduks");
         });
     }
 
