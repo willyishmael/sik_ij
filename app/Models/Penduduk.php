@@ -9,6 +9,10 @@ class Penduduk extends Model
 {
     use HasFactory;
 
+    protected $guarded = [
+        'id',
+    ];
+
     public function rumah() {
         return $this->belongsTo(Rumah::class, 'rumah_id', 'id');
     }
