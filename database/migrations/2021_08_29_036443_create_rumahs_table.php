@@ -16,7 +16,7 @@ class CreateRumahsTable extends Migration
         Schema::create('rumahs', function (Blueprint $table) {
             $table->id();
             $table->string("no_rumah");
-            $table->foreignId("pemilik_id");
+            $table->foreignId("pemilik_id")->constrained('pemiliks');
             $table->string("lingkungan");
             $table->string("alamat");
             $table->timestamps();

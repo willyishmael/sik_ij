@@ -16,7 +16,7 @@ class CreatePenduduksTable extends Migration
         Schema::create('penduduks', function (Blueprint $table) {
             $table->id();
             $table->string("nama");
-            $table->foreignId('rumah_id');
+            $table->foreignId('rumah_id')->constrained('rumahs');
             $table->string("tempat_lahir");
             $table->date("tanggal_lahir");
             $table->string("nik")->unique();
@@ -24,7 +24,7 @@ class CreatePenduduksTable extends Migration
             $table->string("email")->unique();
             $table->boolean("jenis_kelamin");
             $table->string("status_pernikahan");
-            $table->foreignId("kepala_keluarga_id");
+            $table->foreignId("kepala_keluarga_id")->constrained('penduduks');
             $table->timestamps();
         });
     }
