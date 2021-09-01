@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-//use App\Models\...;
+use App\Models\Pemilik;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class PemilikSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,9 +13,9 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {        
-        $this->call([
-            PemilikSeeder::class,
-        ]);
+    {
+        Pemilik::factory()
+        ->count(10)
+        ->create();
     }
 }

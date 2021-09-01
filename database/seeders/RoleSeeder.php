@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-//use App\Models\...;
+use App\Models\Role;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class RoleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,9 +13,9 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {        
-        $this->call([
-            PemilikSeeder::class,
+    {
+        Role::create([
+            'rolename' => 'okelkarombasan'
         ]);
     }
 }
