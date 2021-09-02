@@ -24,7 +24,7 @@ class CreatePenduduksTable extends Migration
             $table->string("email")->unique();
             $table->boolean("jenis_kelamin");
             $table->string("status_pernikahan");
-            $table->foreignId("kepala_keluarga_id")->constrained('penduduks');
+            $table->unsignedBigInteger("kepala_keluarga_id")->nullable();
             $table->timestamps();
         });
     }

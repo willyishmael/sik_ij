@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Rumah;
 use Illuminate\Database\Seeder;
 
 class RumahSeeder extends Seeder
@@ -13,6 +14,9 @@ class RumahSeeder extends Seeder
      */
     public function run()
     {
-        //
+        //$pemilik = Pemilik::factory()->create();
+        Rumah::factory()
+                ->count(10)
+                ->create();
     }
 }
