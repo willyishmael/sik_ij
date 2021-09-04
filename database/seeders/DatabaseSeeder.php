@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             PemilikSeeder::class,
             RumahSeeder::class,
             PendudukSeeder::class,
-            KelurahanSeeder::class
+            KelurahanSeeder::class,
+            UserSeeder::class
         ]);
     }
 }

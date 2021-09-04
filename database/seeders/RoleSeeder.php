@@ -17,5 +17,13 @@ class RoleSeeder extends Seeder
         Role::create([
             'rolename' => 'okelkarombasan'
         ]);
+
+        Role::create([
+            'rolename' => 'opemerintah'
+        ]);
+
+        Role::create([
+            'rolename' => 'superadmin'
+        ]);
     }
 }

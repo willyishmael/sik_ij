@@ -15,7 +15,7 @@ class KelurahanSeeder extends Seeder
     public function run()
     {
         Kelurahan::create([
-            'nama_kelurahan' => 'karombasan',
+            'nama_kelurahan' => 'Karombasan',
             'lurah_id' => 3,
             'sekretaris_id' => 7
         ]);
