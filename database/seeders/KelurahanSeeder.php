@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use app\Models\Kelurahan;
+use App\Models\Kelurahan;
 use Illuminate\Database\Seeder;
 
 class KelurahanSeeder extends Seeder
@@ -14,14 +14,16 @@ class KelurahanSeeder extends Seeder
      */
     public function run()
     {
-        Kelurahan::create([[
+        Kelurahan::create([
             'nama_kelurahan' => 'karombasan',
-            'lurah_id' => '3',
-            'sekretaris_id' => '7'
-        ],[
+            'lurah_id' => 3,
+            'sekretaris_id' => 7
+        ]);
+
+        Kelurahan::create([
             'nama_kelurahan' => 'Bahu',
-            'lurah_id' => '1',
-            'sekretaris_id' => '2'
-        ]]);
+            'lurah_id' => 1,
+            'sekretaris_id' => 2
+        ]);
     }
 }
