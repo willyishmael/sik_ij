@@ -23,3 +23,6 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');//->middl
 Route::post('/login', [LoginController::class, 'authenticate']);
 
 Route::get('/dashboard', [DashboardController::class, 'index']);//->middleware('auth');
+
+Route::get('/admin', 'AdminController@index');
+Route::get('/superadmin', 'SuperAdminController@index');

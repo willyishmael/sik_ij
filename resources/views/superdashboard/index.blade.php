@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=h1, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Admin</title>
+    <title>Super Admin</title>
 </head>
 <body>
-    <h1>Welcome Admin</h1>
+    <h1>Welcome Super Admin</h1>
 </body>
 </html>
