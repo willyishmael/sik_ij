@@ -8,24 +8,19 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    /**
-     * Show the form to create a new blog post.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create()
+
+    public function index()
     {
-        return view('post.create');
+        return view('login.index', [
+            'title' => 'SIK Login'
+        ]);
     }
 
-    /**
-     * Store a new blog post.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function authenticate(Request $request)
+     public function authenticate(Request $request)
     {
+
+        //$request['password'] = bcrypt($request['password']);
+
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
@@ -38,7 +33,5 @@ class LoginController extends Controller
         }
 
         return back()->with('loginError', 'Login failed!');
-
-        dd('berhasil login');
     }
 }
