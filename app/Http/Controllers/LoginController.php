@@ -38,10 +38,17 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'email' => ['required'],
-            'password' => ['required', 'confirmed', Password::min(5)],
+        // $validator = Validator::make($request->all(), [
+        //     'email' => ['required', 'email'],
+        //     'password' => ['required'],
+        // ]);
+
+        $validated = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
         ]);
+
+        // var_dump($validated);
 
         // $emailCheck;
         // if ($validator['email'] == User::with()) {
@@ -50,13 +57,20 @@ class LoginController extends Controller
 
         // if (Hash::check($validator['password'], $hashedValue))
 
-        $users = User::where($validator->email, '=', $request->input('email'))->first();
+        $users = User::where('email', '=', $request->input('email'))->first();
+        // var_dump($users);
         if ($users === null) {
-            // User does not exist
+            dd($users);
         } else {
-            if (Hash::check($validator['password'], $users->password)) {
+            // echo($users['password']);
 
-            }
+            if (Hash::check($validated['password'], $users['password'])) {
+                // echo('so jadi');
+                $request->session()->regenerate();
+                return redirect()->intended('/dashboard');
+            } else {
+                // echo('blum jadi');
+            };
         };
     }
 }
