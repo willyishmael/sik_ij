@@ -26,10 +26,10 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'superadmin',
-            'email' => 'superadmin@gmail.com',
+            'name' => 'user',
+            'email' => 'user@gmail.com',
             'email_verified_at' => now(),
-            'password' => bcrypt('superadmin'),
+            'password' => bcrypt('password'),
             'role_id' => '2',
             'kelurahan_id' => '2',
             'remember_token' => Str::random(10)

@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Authenticatable
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use Authenticatable, CanResetPassword;
+
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -50,35 +53,11 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class, 'kelurahan_id', 'id');
     }
 
-    public function authorizeRoles($roles)
-    {
-      if ($this->hasAnyRole($roles)) {
-        return true;
-      }
-      abort(401, 'This action is unauthorized.');
+    public function isAdmin() {
+      return $this->role === 'admin';
     }
 
-    public function hasAnyRole($roles)
-    {
-      if (is_array($roles)) {
-        foreach ($roles as $role) {
-          if ($this->hasRole($role)) {
-            return true;
-          }
-        }
-      } else {
-        if ($this->hasRole($roles)) {
-          return true;
-        }
-      }
-      return false;
-    }
-
-    public function hasRole($role)
-    {
-      if ($this->role()->where('rolename', $role)->first()) {
-        return true;
-      }
-      return false;
+    public function isUser() {
+      return $this->role === 'user';
     }
 }

@@ -15,8 +15,12 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 
 Route::get('/dashboard', [DashboardController::class, 'index']);//->middleware('auth');
 
-// Route::get('/admin', 'AdminController@index');
-// Route::get('/superadmin', 'SuperAdminController@index');
+// admin protected routes
+Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
+    Route::get('/', 'HomeController@index')->name('admin_dashboard');
+});
 
-Route::get('/admin', [AdminController::class, 'index']);
-Route::get('/superadmin', [SuperAdminController::class, 'index']);
+// user protected routes
+Route::group(['middleware' => ['auth', 'user'], 'prefix' => 'user'], function () {
+    Route::get('/', 'HomeController@index')->name('user_dashboard');
+});
