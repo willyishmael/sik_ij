@@ -32,13 +32,13 @@ Route::middleware('auth')->group(function () {
         Route::delete('/datapenduduk', [OperatorController::class, 'destroy'])->name('destroy');
     });
 
-    Route::get('/dashboard', [DashboardController::class,'']);
+    // Route::get('/dashboard', [DashboardController::class,'jumlahPendudukKelurahan']);
 });
 
 // Route::get('/login', [LoginController::class, 'index']);
 Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
 Route::get('/logout', [LogoutController::class, 'logout'])->middleware('auth');
-
+Route::post('/dashboard', [DashboardController::class,'jumlahPendudukKelurahan']);
 
 
 // Route::get('/auth', [LoginController::class, 'auth']);

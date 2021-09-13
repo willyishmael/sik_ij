@@ -11,12 +11,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dashboard', [DashboardController::class,'jumlahPendudukKelurahan']);
+
 //Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 
 Route::get('/logout', [LogoutController::class, 'logout'])->middleware('auth');
 
-Route::get('/dashboard', [DashboardController::class, 'index']);//->middleware('auth');
+// Route::get('/dashboard', [DashboardController::class, 'index']);//->middleware('auth');
 
 // admin protected routes
 Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {

@@ -13,9 +13,10 @@ class LoginController extends Controller
 
     public function index()
     {
-        return view('login.index', [
-            'title' => 'SIK Login'
-        ]);
+        return response()->json([
+            'msg' => ''
+
+        ], 200);
     }
 
      public function authenticate(Request $request)
