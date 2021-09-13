@@ -28,12 +28,12 @@ class PendudukFactory extends Factory
             'rumah_id' => rand(1,10),
             'tempat_lahir' => $this->faker->city(),
             'tanggal_lahir' => $this->faker->date(),
+            'no_kk' => "717107".(string)rand(1000000000,9999999999),
             'nik' => "717107".(string)rand(1000000000,9999999999),
             'no_telp' => $this->faker->phoneNumber(),
             'email' => $this->faker->unique()->safeEmail(),
             'jenis_kelamin' => rand(0,1),
             'status_pernikahan' => $status_pernikahan[rand(0,2)],
-            'kepala_keluarga_id' => rand(1,10),        
         ];
     }
 }

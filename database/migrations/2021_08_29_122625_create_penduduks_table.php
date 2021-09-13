@@ -19,12 +19,12 @@ class CreatePenduduksTable extends Migration
             $table->foreignId('rumah_id')->constrained('rumahs');
             $table->string("tempat_lahir");
             $table->date("tanggal_lahir");
+            $table->string("no_kk")->unique();
             $table->string("nik")->unique();
-            $table->string("no_telp")->unique();
-            $table->string("email")->unique();
+            $table->string("no_telp");
+            $table->string("email")->nullable();
             $table->boolean("jenis_kelamin");
             $table->string("status_pernikahan");
-            $table->unsignedBigInteger("kepala_keluarga_id")->nullable();
             $table->timestamps();
         });
     }
