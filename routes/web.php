@@ -11,7 +11,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+//Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 
 Route::get('/logout', [LogoutController::class, 'logout'])->middleware('auth');
@@ -27,3 +27,5 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function 
 Route::group(['middleware' => ['auth', 'user'], 'prefix' => 'user'], function () {
     Route::get('/', 'HomeController@index')->name('user_dashboard');
 });
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

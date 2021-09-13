@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,11 +21,26 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::middleware('auth')->group(function () {
+    Route::prefix('/admin')->name('')->group(function() {
+        Route::get('/', [AdminController::class, '']);
+    });
 
-Route::post('/login', [LoginController::class, 'authenticate']);
+    Route::prefix('/operator')->name('')->group(function() {
+        Route::post('/datapenduduk', [OperatorController::class, 'store'])->name('store');
+        Route::put('/datapenduduk', [OperatorController::class, 'update'])->name('update');
+        Route::delete('/datapenduduk', [OperatorController::class, 'destroy'])->name('destroy');
+    });
 
-Route::get('/logout', [LogoutController::class, 'logout']);
+    Route::get('/dashboard', [DashboardController::class,'']);
+});
 
-Route::get('/auth', [LoginController::class, 'auth']);
+// Route::get('/login', [LoginController::class, 'index']);
+Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
+Route::get('/logout', [LogoutController::class, 'logout'])->middleware('auth');
 
-Route::get('/authrole', [LoginController::class, 'authrole']);
+
+
+// Route::get('/auth', [LoginController::class, 'auth']);
+
+// Route::get('/authrole', [LoginController::class, 'authrole']);
