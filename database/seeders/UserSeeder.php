@@ -20,17 +20,17 @@ class UserSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
             'password' => bcrypt('admin'),
-            'role_id' => '1',
+            'role' => 'admin',
             'kelurahan_id' => '1',
             'remember_token' => Str::random(10)
         ]);
 
         User::create([
-            'name' => 'user',
-            'email' => 'user@gmail.com',
+            'name' => 'operator',
+            'email' => 'operator@gmail.com',
             'email_verified_at' => now(),
-            'password' => bcrypt('password'),
-            'role_id' => '2',
+            'password' => bcrypt('operator'),
+            'role' => 'operator',
             'kelurahan_id' => '2',
             'remember_token' => Str::random(10)
         ]);

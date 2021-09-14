@@ -22,6 +22,7 @@ class PendudukFactory extends Factory
     public function definition()
     {
         $status_pernikahan = ['Belum Menikah','Sudah Menikah','Janda/Duda'];
+        $jenis_kelamin = ['Laki-laki','Perempuan'];
         
         return [
             'nama' => $this->faker->name(),
@@ -31,8 +32,8 @@ class PendudukFactory extends Factory
             'no_kk' => "717107".(string)rand(1000000000,9999999999),
             'nik' => "717107".(string)rand(1000000000,9999999999),
             'no_telp' => $this->faker->phoneNumber(),
-            'email' => $this->faker->unique()->safeEmail(),
-            'jenis_kelamin' => rand(0,1),
+            'email' => $this->faker->safeEmail(),
+            'jenis_kelamin' => $jenis_kelamin[rand(0,1)],
             'status_pernikahan' => $status_pernikahan[rand(0,2)],
         ];
     }

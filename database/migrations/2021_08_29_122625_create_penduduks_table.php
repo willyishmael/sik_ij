@@ -23,7 +23,7 @@ class CreatePenduduksTable extends Migration
             $table->string("nik")->unique();
             $table->string("no_telp");
             $table->string("email")->nullable();
-            $table->boolean("jenis_kelamin");
+            $table->string("jenis_kelamin");
             $table->string("status_pernikahan");
             $table->timestamps();
         });
