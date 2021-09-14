@@ -3,20 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
 
     public function index()
     {
-        return response()->json([
-            'msg' => ''
-
-        ], 200);
+        return view('login.index');
     }
 
      public function authenticate(Request $request)
@@ -27,17 +23,17 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            // $user = User::where('email', $credentials['email']->first());
+  
+            $kelurahan = DB::table('users')
+                ->where('email','=', $request['email'])
+                ->get();
 
-        // dd(User::where('email', $credentials['email']->first()));
-        //     $request->session()->regenerate();
-
-            // return redirect()->intended('/dashboard');
-            // return response()->json($user->toJson(), 200);
-
-            return response()->json([
-                'message' => 'Success',
-            ], 200);
+            return response()->json(
+                
+                array_merge_recursive([
+                    'message' => 'Success',
+                ],(array) $kelurahan), 200
+            );
 
         } else {
             return response()->json([
@@ -45,7 +41,6 @@ class LoginController extends Controller
             ], 401);
         }
 
-        // return back()->with('loginError', 'Login failed!');
     }
 
     

@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kelurahan;
 use App\Models\Penduduk;
 use Illuminate\Http\Request;
 
 class OperatorController extends Controller
 {
-    public function store(Request $request) {
+    public function storePenduduk(Request $request) {
 
-        $validated = $request->validate([
+        $request->validate([
             'nama' => 'required',
             'rumah_id' => 'required',
             'tempat_lahir' => 'required',
@@ -35,8 +36,59 @@ class OperatorController extends Controller
             'status_pernikahan' => $request->status_pernikahan,
         ]);
 
+        $saved = $new_penduduk->save();
+
+        if(!$saved){
+            Penduduk::abort(500, 'Error');
+        } else {
+            return response()->json([
+                'message' => 'Success Menambahkan Data',
+            ], 200);
+        }
     }
-    public function update() {}
-    public function destroy() {}
+
+    public function storeKelurahan(Request $request) {
+
+        $request->validate([
+            'nama_kelurahan' => 'required',
+            'lurah_id' => 'required',
+            'sekretaris_id' => 'required',
+        ]);
+
+        $new_kelurahan = Kelurahan::create([
+            'nama_kelurahan' => $request->nama_kelurahan,
+            'lurah_id' => $request->lurah_id,
+            'sekretaris_id' => $request->sekretaris_id,
+        ]);
+
+        $saved = $new_kelurahan->save();
+
+        if(!$saved){
+            Kelurahan::abort(500, 'Error');
+        } else {
+            return response()->json([
+                'message' => 'Success Menambahkan Data',
+            ], 200);
+        }
+    }
+
+    public function storeRumah(Request $request) {
+        $request->validate([
+            'no_rumah' => 'required',
+            'pemilik_id' => 'required',
+            'lingkungan' => 'required',
+            'alamat' => 'required',
+        ]);
+    }
+
+    public function update() {
+
+    }
+
+    public function destroy() {
+
+    }
+
+    
     
 }
