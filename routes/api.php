@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KelurahanController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -38,9 +39,9 @@ Route::middleware('auth')->group(function () {
 // Route::get('/login', [LoginController::class, 'index']);
 Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
 Route::get('/logout', [LogoutController::class, 'logout'])->middleware('auth');
-Route::post('/dashboard', [DashboardController::class,'jumlahPendudukKelurahan']);
+Route::get('/penduduk', [DashboardController::class,'jumlahPendudukKelurahan']);
+Route::get('/kelurahan', [KelurahanController::class,'showDataKelurahan']);
 
 
 // Route::get('/auth', [LoginController::class, 'auth']);
-
 // Route::get('/authrole', [LoginController::class, 'authrole']);
