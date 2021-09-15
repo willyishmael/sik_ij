@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kelurahan;
+use App\Models\Pemilik;
 use App\Models\Penduduk;
+use App\Models\Rumah;
 use Illuminate\Http\Request;
 
 class OperatorController extends Controller
@@ -73,12 +75,54 @@ class OperatorController extends Controller
     }
 
     public function storeRumah(Request $request) {
+
         $request->validate([
             'no_rumah' => 'required',
             'pemilik_id' => 'required',
             'lingkungan' => 'required',
             'alamat' => 'required',
         ]);
+
+        $new_rumah = Rumah::create([
+            'no_rumah' => $request->no_rumah,
+            'pemilik_id' => $request->pemilik_id,
+            'lingkungan' => $request->lingkungan,
+            'alamat' => $request->alamat,
+        ]);
+
+        $saved = $new_rumah->save();
+
+        if(!$saved){
+            Rumah::abort(500, 'Error');
+        } else {
+            return response()->json([
+                'message' => 'Success Menambahkan Data',
+            ], 200);
+        }
+    }
+
+    public function storePemilik(Request $request) {
+
+        $request->validate([
+            'nama' => 'required',
+            'nik' => 'required',
+        ]);
+
+        $new_pemilik = Pemilik::create([
+            'nama' => $request->nama,
+            'nik' => $request->nik,
+        ]);
+
+        $saved = $new_pemilik->save();
+        
+        if(!$saved){
+            Pemilik::abort(500, 'Error');
+        } else {
+            return response()->json([
+                'message' => 'Success Menambahkan Data',
+            ], 200);
+        }
+
     }
 
     public function update() {
