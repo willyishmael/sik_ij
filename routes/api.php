@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PendudukController;
 use App\Http\Controllers\KelurahanController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Http\Request;
@@ -37,9 +37,9 @@ Route::middleware('auth')->group(function () {
 });
 
 // Route::get('/login', [LoginController::class, 'index']);
-Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
-Route::get('/logout', [LogoutController::class, 'logout'])->middleware('auth');
-Route::get('/penduduk', [DashboardController::class,'jumlahPendudukKelurahan']);
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::get('/logout', [LogoutController::class, 'logout']);
+Route::get('/penduduk', [PendudukController::class,'jumlahPendudukKelurahan']);
 Route::get('/kelurahan', [KelurahanController::class,'showDataKelurahan']);
 
 

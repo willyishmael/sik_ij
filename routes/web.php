@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PendudukController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\KelurahanController;
 use App\Http\Controllers\LogoutController;
@@ -33,4 +34,5 @@ Route::group(['middleware' => ['auth', 'user'], 'prefix' => 'user'], function ()
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/penduduk', [PendudukController::class,'jumlahPendudukKelurahan'])->middleware('auth');
 Route::get('/kelurahan', [KelurahanController::class, 'showDataKelurahan']);
