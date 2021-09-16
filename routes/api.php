@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PendudukController;
 use App\Http\Controllers\KelurahanController;
 use App\Http\Controllers\LoginController;
@@ -33,15 +34,10 @@ Route::middleware('auth')->group(function () {
         Route::delete('/datapenduduk', [OperatorController::class, 'destroy'])->name('destroy');
     });
 
-    // Route::get('/dashboard', [DashboardController::class,'jumlahPendudukKelurahan']);
 });
 
-// Route::get('/login', [LoginController::class, 'index']);
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::get('/logout', [LogoutController::class, 'logout']);
+Route::post('/auth', [AuthController::class, 'checkUserToken']);
 Route::get('/penduduk', [PendudukController::class,'jumlahPendudukKelurahan']);
-Route::get('/kelurahan', [KelurahanController::class,'showDataKelurahan']);
-
-
-// Route::get('/auth', [LoginController::class, 'auth']);
-// Route::get('/authrole', [LoginController::class, 'authrole']);
+Route::post('/kelurahan', [KelurahanController::class,'showDataKelurahan']);

@@ -24,21 +24,15 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
   
-            $kelurahan = DB::table('users')
-                ->select('id','name','email','kelurahan_id','role')
+            $user = DB::table('users')
+                ->select('id','name','email','kelurahan_id','role','remember_token')
                 ->where('email','=', $request['email'])
-                ->get();
-
-            $allKelurahan = DB::table('users')
-                ->select('*')
                 ->first();
 
-            return response()->json(
-                
-                array_merge_recursive([
-                    'message' => 'Success',
-                    'token' => $allKelurahan->remember_token,
-                ],(array) $kelurahan), 200);
+            return response()->json([
+                'message' => 'Success',
+                'user' => $user,
+            ], 200);
 
         } else {
             return response()->json([
