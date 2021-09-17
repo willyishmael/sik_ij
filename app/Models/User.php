@@ -33,7 +33,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $hidden = [
         'password',
-        'remember_token',
     ];
 
     /**
@@ -50,14 +49,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     public function kelurahan() {
-        return $this->belongsTo(Role::class, 'kelurahan_id', 'id');
+        return $this->belongsTo(Kelurahan::class, 'kelurahan_id', 'id');
     }
 
-    public function isAdmin() {
-      return $this->role === 'admin';
-    }
-
-    public function isUser() {
-      return $this->role === 'user';
-    }
 }

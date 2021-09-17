@@ -40,4 +40,4 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 Route::get('/logout', [LogoutController::class, 'logout']);
 Route::post('/auth', [AuthController::class, 'checkUserToken']);
 Route::get('/penduduk', [PendudukController::class,'jumlahPendudukKelurahan']);
-Route::post('/kelurahan', [KelurahanController::class,'showDataKelurahan']);
+Route::post('/kelurahan', [KelurahanController::class,'showProfilKelurahan']);

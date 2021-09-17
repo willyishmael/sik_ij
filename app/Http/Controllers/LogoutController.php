@@ -8,11 +8,9 @@ use Illuminate\Support\Facades\Auth;
 class LogoutController extends Controller
 {
     public function logout(Request $request) {
-        Auth::logout();
         return response()->json([
             'message' => 'logout berhasil'
         ], 200);
-
     }
 
 }

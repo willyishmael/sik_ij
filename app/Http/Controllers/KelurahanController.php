@@ -10,21 +10,23 @@ use Illuminate\Support\Facades\DB;
 
 class KelurahanController extends Controller
 {
-    public function showDataKelurahan(Request $request)
+    public function showProfilKelurahan(Request $request)
     {
-        // $kelurahan_id = User::select('kelurahan_id')
-        //         ->where('remember_token', '=', $request->token)
-        //         ->first();
+
+        
+        $kelurahan_id = User::select('kelurahan_id')
+                ->where('remember_token', '=', $request->token)
+                ->first();
 
         // $kelurahan_id = Auth::user()->kelurahan_id;
 
-        if (true) {
+        if ($kelurahan_id != null) {
         
             // $kelurahan_id = User::select('remember_token')
             //     ->where('email','=',$request['email'])
             //     ->first();
 
-            $kelurahan_id = 1;
+            // $kelurahan_id = 1;
 
             $kelurahan = Kelurahan::select('kelurahans.*')
                 ->where('kelurahans.id', '=', $kelurahan_id)
@@ -48,6 +50,7 @@ class KelurahanController extends Controller
                 'lurah' => $lurah,
                 'sekretaris' => $sekretaris,
             ], 200);
+
         } else {
             return response()->json([
                 'message' => 'Token salah, redirect ke login',

@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PendudukController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KelurahanController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\SuperAdminController;
@@ -36,3 +37,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/penduduk', [PendudukController::class,'jumlahPendudukKelurahan'])->middleware('auth');
 Route::get('/kelurahan', [KelurahanController::class, 'showDataKelurahan']);
+Route::get('/auth', [AuthController::class, 'checkUserToken']);
+
+Route::get('/jointest', [LoginController::class, 'test']);

@@ -50,7 +50,7 @@ class AuthController extends Controller
                     'link' => 'petkel'
                 ],
             ];
-            
+
             if ($user->role == 'admin') {
                 $admin_menus = $menus;
                 array_push($admin_menus, [
