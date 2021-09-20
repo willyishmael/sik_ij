@@ -18,6 +18,18 @@ class KelurahanSeeder extends Seeder
         $faker = Factory::create();
 
         Kelurahan::create([
+            'kelurahan' => 'Admin',
+            'kecamatan' => 'Admin',
+            'kabupaten_kota' => 'Manado',
+            'provinsi' => 'Sulawesi Utara',
+            'alamat_kantor' => $faker->address(),
+            'telepon_kelurahan' => $faker->phoneNumber(),
+            'email_kelurahan' => $faker->safeEmail(),
+            'lurah_id' => 1,
+            'sekretaris_id' => 2
+        ]);
+
+        Kelurahan::create([
             'kelurahan' => 'Karombasan',
             'kecamatan' => 'Wanea',
             'kabupaten_kota' => 'Manado',
@@ -26,7 +38,7 @@ class KelurahanSeeder extends Seeder
             'telepon_kelurahan' => $faker->phoneNumber(),
             'email_kelurahan' => $faker->safeEmail(),
             'lurah_id' => 3,
-            'sekretaris_id' => 7
+            'sekretaris_id' => 4
         ]);
 
         Kelurahan::create([
@@ -37,8 +49,8 @@ class KelurahanSeeder extends Seeder
             'alamat_kantor' => $faker->address(),
             'telepon_kelurahan' => $faker->phoneNumber(),
             'email_kelurahan' => $faker->safeEmail(),
-            'lurah_id' => 1,
-            'sekretaris_id' => 2
+            'lurah_id' => 5,
+            'sekretaris_id' => 6
         ]);
     }
 }

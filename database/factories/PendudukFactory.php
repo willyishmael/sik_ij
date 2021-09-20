@@ -27,6 +27,7 @@ class PendudukFactory extends Factory
         return [
             'nama' => $this->faker->name(),
             'rumah_id' => rand(1,10),
+            'kelurahan_id' => rand(2,3),
             'tempat_lahir' => $this->faker->city(),
             'tanggal_lahir' => $this->faker->date(),
             'no_kk' => "717107".(string)rand(1000000000,9999999999),

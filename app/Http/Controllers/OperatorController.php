@@ -7,9 +7,24 @@ use App\Models\Pemilik;
 use App\Models\Penduduk;
 use App\Models\Rumah;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 class OperatorController extends Controller
 {
+    public function test ()
+    {
+        $response = Http::get('http://geoportal.manadokota.go.id/geoserver/wfs?srsName=EPSG%3A4326&typename=geonode%3Akelurahan_karame_kecsingkil_1&outputFormat=json&version=1.0.0&service=WFS&request=GetFeature&access_token=oSi0KWhuVqDEv3Ati0nJeTAZBBmM2E');
+
+        $response = $response->json();
+
+        for ($i=0; $i < count($response['features']); $i++) { 
+            $response['features'][$i]['properties']['aa'] = Str::random(12);
+        }
+        
+        return response()->json($response, 200);
+    }
+
     public function storePenduduk(Request $request) {
 
         $request->validate([

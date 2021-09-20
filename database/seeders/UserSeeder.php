@@ -26,12 +26,22 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'operator',
-            'email' => 'operator@gmail.com',
+            'name' => 'karombasan',
+            'email' => 'karombasan@gmail.com',
             'email_verified_at' => now(),
-            'password' => bcrypt('operator'),
+            'password' => bcrypt('karombasan'),
             'role' => 'operator',
             'kelurahan_id' => '2',
+            'remember_token' => Str::random(10)
+        ]);
+
+        User::create([
+            'name' => 'bahu',
+            'email' => 'bahu@gmail.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('bahuu'),
+            'role' => 'operator',
+            'kelurahan_id' => '3',
             'remember_token' => Str::random(10)
         ]);
     }

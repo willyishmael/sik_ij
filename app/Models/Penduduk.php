@@ -17,8 +17,8 @@ class Penduduk extends Model
         return $this->belongsTo(Rumah::class, 'rumah_id', 'id');
     }
 
-    public function kepalaKeluarga() {
-        return $this->belongsTo(Penduduk::class, 'kepala_keluarga_id', 'id');
+    public function kelurahan() {
+        return $this->belongsTo(Kelurahan::class, 'kelurahan_id', 'id');
     }
 
 }

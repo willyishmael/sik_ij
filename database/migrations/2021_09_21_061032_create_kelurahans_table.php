@@ -22,8 +22,8 @@ class CreateKelurahansTable extends Migration
             $table->string("alamat_kantor");  
             $table->string("telepon_kelurahan");  
             $table->string("email_kelurahan");  
-            $table->foreignId("lurah_id")->constrained('penduduks');
-            $table->foreignId("sekretaris_id")->constrained('penduduks');
+            $table->foreignId("lurah_id")->constrained('perangkat_kelurahans');
+            $table->foreignId("sekretaris_id")->constrained('perangkat_kelurahans');
             $table->timestamps();
         });
     }

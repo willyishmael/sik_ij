@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KelurahanController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\SuperAdminController;
 
 Route::get('/', function () {
@@ -39,4 +40,4 @@ Route::get('/penduduk', [PendudukController::class,'jumlahPendudukKelurahan'])->
 Route::get('/kelurahan', [KelurahanController::class, 'showDataKelurahan']);
 Route::get('/auth', [AuthController::class, 'checkUserToken']);
 
-Route::get('/jointest', [LoginController::class, 'test']);
+Route::get('/test', [OperatorController::class, 'test']);

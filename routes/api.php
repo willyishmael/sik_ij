@@ -39,5 +39,11 @@ Route::middleware('auth')->group(function () {
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::get('/logout', [LogoutController::class, 'logout']);
 Route::post('/auth', [AuthController::class, 'checkUserToken']);
-Route::get('/penduduk', [PendudukController::class,'jumlahPendudukKelurahan']);
-Route::post('/kelurahan', [KelurahanController::class,'showProfilKelurahan']);
+
+Route::get('/penduduk/show', [PendudukController::class,'show']);
+Route::get('/penduduk/create', [PendudukController::class,'create']);
+Route::get('/penduduk/update', [PendudukController::class,'update']);
+Route::get('/penduduk/delete', [PendudukController::class,'delete']);
+
+Route::post('/kelurahan/show', [KelurahanController::class,'show']);
+Route::post('/kelurahan/update', [KelurahanController::class,'update']);

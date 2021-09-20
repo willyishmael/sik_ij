@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 //use App\Models\...;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,10 +17,11 @@ class DatabaseSeeder extends Seeder
     {        
         $this->call([
             RoleSeeder::class,
+            PerangkatKelurahanSeeder::class,
+            KelurahanSeeder::class,
             PemilikSeeder::class,
             RumahSeeder::class,
             PendudukSeeder::class,
-            KelurahanSeeder::class,
             UserSeeder::class
         ]);
     }
