@@ -2,20 +2,20 @@
 
 namespace Database\Factories;
 
-use App\Models\Rumah;
+use App\Models\Bangunan;
 use App\Models\Pemilik;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 
 
-class RumahFactory extends Factory
+class BangunanFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Rumah::class;
+    protected $model = Bangunan::class;
 
     /**
      * Define the model's default state.
@@ -25,7 +25,7 @@ class RumahFactory extends Factory
     public function definition()
     {
         return [
-            'no_rumah' => rand(1,99),
+            'nomor_bangunan' => rand(1,99),
             'pemilik_id' => rand(1,10),
             'kelurahan_id' => rand(2,3),
             'lingkungan' => rand(1,15),

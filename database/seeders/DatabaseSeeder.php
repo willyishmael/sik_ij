@@ -2,17 +2,10 @@
 
 namespace Database\Seeders;
 
-//use App\Models\...;
-
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {        
         $this->call([
@@ -20,7 +13,7 @@ class DatabaseSeeder extends Seeder
             PerangkatKelurahanSeeder::class,
             KelurahanSeeder::class,
             PemilikSeeder::class,
-            RumahSeeder::class,
+            BangunanSeeder::class,
             PendudukSeeder::class,
             UserSeeder::class
         ]);

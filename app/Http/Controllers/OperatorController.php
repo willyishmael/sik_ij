@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bangunan;
 use App\Models\Kelurahan;
 use App\Models\Pemilik;
 use App\Models\Penduduk;
-use App\Models\Rumah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
 class OperatorController extends Controller
 {
-    public function test ()
-    {
+    public function test() {
+      
         $response = Http::get('http://geoportal.manadokota.go.id/geoserver/wfs?srsName=EPSG%3A4326&typename=geonode%3Akelurahan_karame_kecsingkil_1&outputFormat=json&version=1.0.0&service=WFS&request=GetFeature&access_token=oSi0KWhuVqDEv3Ati0nJeTAZBBmM2E');
 
         $response = $response->json();
 
         for ($i=0; $i < count($response['features']); $i++) { 
-            $response['features'][$i]['properties']['aa'] = Str::random(12);
+            $response['features'][$i]['properties']['test'] = Str::random(12);
         }
         
         return response()->json($response, 200);
@@ -98,7 +98,7 @@ class OperatorController extends Controller
             'alamat' => 'required',
         ]);
 
-        $new_rumah = Rumah::create([
+        $new_rumah = Bangunan::create([
             'no_rumah' => $request->no_rumah,
             'pemilik_id' => $request->pemilik_id,
             'lingkungan' => $request->lingkungan,
@@ -108,7 +108,7 @@ class OperatorController extends Controller
         $saved = $new_rumah->save();
 
         if(!$saved){
-            Rumah::abort(500, 'Error');
+            Bangunan::abort(500, 'Error');
         } else {
             return response()->json([
                 'message' => 'Success Menambahkan Data',

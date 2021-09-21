@@ -18,7 +18,7 @@ class CreatePerangkatKelurahansTable extends Migration
             $table->string('nama');
             $table->string('nip');
             $table->string('email');
-            $table->string('no_telp');
+            $table->string('nomor_telepon');
             $table->timestamps();
         });
     }

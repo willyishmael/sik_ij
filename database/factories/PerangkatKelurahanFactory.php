@@ -25,7 +25,7 @@ class PerangkatKelurahanFactory extends Factory
             'nama' => $this->faker->name(),
             'nip' => rand(100000000000,9999999999),
             'email' => $this->faker->safeEmail(),
-            'no_telp' => $this->faker->phoneNumber()
+            'nomor_telepon' => $this->faker->phoneNumber()
         ];
     }
 }

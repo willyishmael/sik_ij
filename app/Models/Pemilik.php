@@ -13,7 +13,7 @@ class Pemilik extends Model
         'id',
     ];
 
-    public function rumah() {
-        $this->hasMany(Rumah::class, 'pemilik_id', 'id');
+    public function bangunan() {
+        $this->hasMany(Bangunan::class, 'pemilik_id', 'id');
     }
 }

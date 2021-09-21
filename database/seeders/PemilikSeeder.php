@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Bangunan;
 use App\Models\Pemilik;
-use App\Models\Rumah;
 use Illuminate\Database\Seeder;
 
 class PemilikSeeder extends Seeder
@@ -17,7 +17,7 @@ class PemilikSeeder extends Seeder
     {
         Pemilik::factory()
         ->count(10)
-        ->has(Rumah::factory()->count(3))
+        ->has(Bangunan::factory()->count(3))
         ->create();
     }
 }

@@ -4,16 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\Kelurahan;
 use App\Models\Penduduk;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PendudukController extends Controller
 {
-    public function show() {
-        $jpk = Penduduk::all();
-        return response()->json($jpk, 200);
+    public function show(Request $request) {
+        Validator::make($request->all(), [
+            'remember_token' => 'required'
+        ]);
+
+        $kelurahan_id = User::where('remember_token', $request->remember_token)->first()['kelurahan_id'];
+        $penduduk = Penduduk::where('kelurahan_id', $kelurahan_id)->get();
 
         return response()->json([
-            'message' => 'Menampilkan data penduduk',
+            'remember_token' => $request->remember_token,
+            'kelurahan_id' => $kelurahan_id,
+            'penduduk' => $penduduk,
         ], 200);
     }
     
@@ -36,9 +44,9 @@ class PendudukController extends Controller
             'kelurahan_id' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
-            'no_kk' => 'required'|'unique',
+            'nomor_kk' => 'required',
             'nik' => 'required'|'unique',
-            'no_telp' => 'required',
+            'nomor_telepon' => 'required',
             'email' => 'required',
             'jenis_kelamin' => 'required',
             'status_pernikahan' => 'required',   
@@ -50,9 +58,9 @@ class PendudukController extends Controller
             'kelurahan_id' => $request->kelurahan_id,
             'tempat_lahir' => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,
-            'no_kk' => $request->no_kk,
+            'nomor_kk' => $request->nomor_kk,
             'nik' => $request->nik,
-            'no_telp' => $request->no_telp,
+            'nomor_telepon' => $request->nomor_telepon,
             'email' => $request->email,
             'jenis_kelamin' => $request->jenis_kelamin,
             'status_pernikahan' => $request->status_pernikahan,
@@ -65,6 +73,7 @@ class PendudukController extends Controller
         } else {
             return response()->json([
                 'message' => 'Success Menambahkan Data',
+                'penduduk' => $saved,
             ], 200);
         }
     }
@@ -78,9 +87,9 @@ class PendudukController extends Controller
         $penduduk->penduduk = $request['kelurahan_id'];
         $penduduk->penduduk = $request['tempat_lahir'];
         $penduduk->penduduk = $request['tanggal_lahir'];
-        $penduduk->penduduk = $request['no_kk'];
+        $penduduk->penduduk = $request['nomor_kk'];
         $penduduk->penduduk = $request['nik'];
-        $penduduk->penduduk = $request['no_telp'];
+        $penduduk->penduduk = $request['nomor_telepon'];
         $penduduk->penduduk = $request['email'];
         $penduduk->penduduk = $request['jenis_kelamin'];
         $penduduk->penduduk = $request['status_pernikahan'];
@@ -91,7 +100,8 @@ class PendudukController extends Controller
             Penduduk::abort(500, 'Error');
         } else {
             return response()->json([
-                'message' => 'Update success'
+                'message' => 'Update success',
+                'penduduk' => $updated
             ], 200);
         }
     }
@@ -110,6 +120,4 @@ class PendudukController extends Controller
             ], 200);
         }
     }
-
-    
 }

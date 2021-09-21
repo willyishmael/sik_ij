@@ -40,10 +40,10 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 Route::get('/logout', [LogoutController::class, 'logout']);
 Route::post('/auth', [AuthController::class, 'checkUserToken']);
 
-Route::get('/penduduk/show', [PendudukController::class,'show']);
-Route::get('/penduduk/create', [PendudukController::class,'create']);
-Route::get('/penduduk/update', [PendudukController::class,'update']);
-Route::get('/penduduk/delete', [PendudukController::class,'delete']);
+Route::post('/penduduk/show', [PendudukController::class,'show']);
+Route::post('/penduduk/create', [PendudukController::class,'create']);
+Route::post('/penduduk/update', [PendudukController::class,'update']);
+Route::post('/penduduk/delete', [PendudukController::class,'delete']);
 
 Route::post('/kelurahan/show', [KelurahanController::class,'show']);
 Route::post('/kelurahan/update', [KelurahanController::class,'update']);

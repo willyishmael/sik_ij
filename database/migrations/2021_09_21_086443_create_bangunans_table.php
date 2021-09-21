@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRumahsTable extends Migration
+class CreateBangunansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateRumahsTable extends Migration
      */
     public function up()
     {
-        Schema::create('rumahs', function (Blueprint $table) {
+        Schema::create('bangunans', function (Blueprint $table) {
             $table->id();
-            $table->string("no_rumah");
+            $table->string("nomor_bangunan");
             $table->foreignId("pemilik_id")->constrained('pemiliks');
             $table->foreignId("kelurahan_id")->constrained('kelurahans');
             $table->string("lingkungan");

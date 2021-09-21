@@ -16,13 +16,13 @@ class CreatePenduduksTable extends Migration
         Schema::create('penduduks', function (Blueprint $table) {
             $table->id();
             $table->string("nama");
-            $table->foreignId('rumah_id')->constrained('rumahs');
+            $table->foreignId('bangunan_id')->constrained('bangunans');
             $table->foreignId('kelurahan_id')->constrained('kelurahans');
             $table->string("tempat_lahir");
             $table->date("tanggal_lahir");
-            $table->string("no_kk")->unique();
+            $table->string("nomor_kk")->unique();
             $table->string("nik")->unique();
-            $table->string("no_telp");
+            $table->string("nomor_telepon");
             $table->string("email")->nullable();
             $table->string("jenis_kelamin");
             $table->string("status_pernikahan");
