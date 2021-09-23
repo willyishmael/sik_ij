@@ -12,7 +12,6 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             PerangkatKelurahanSeeder::class,
             KelurahanSeeder::class,
-            PemilikSeeder::class,
             BangunanSeeder::class,
             PendudukSeeder::class,
             UserSeeder::class

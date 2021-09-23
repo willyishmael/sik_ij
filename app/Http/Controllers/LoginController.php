@@ -35,17 +35,10 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
   
             $user = User::where('email', $request['email'])->first();
-            
-            // $user->kelurahan;
-            // $user->kelurahan->lurah;
-            // $user->kelurahan->sekretaris;
-
-            // $penduduk = Penduduk::where('kelurahan_id', $user->kelurahan_id)->get();
  
             return response()->json([
                 'message' => 'Success',
                 'user' => $user,
-                // 'penduduk' => $penduduk
             ], 200);
 
         } else {

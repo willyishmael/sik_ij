@@ -26,7 +26,8 @@ class BangunanFactory extends Factory
     {
         return [
             'nomor_bangunan' => rand(1,99),
-            'pemilik_id' => rand(1,10),
+            'nama_pemilik' => $this->faker->name(),
+            'nik_pemilik' => "717107".(string)rand(1000000000,9999999999),
             'kelurahan_id' => rand(2,3),
             'lingkungan' => rand(1,15),
             'alamat' => $this->faker->address()

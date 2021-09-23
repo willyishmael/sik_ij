@@ -2,84 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kelurahan;
 use App\Models\PerangkatKelurahan;
 use Illuminate\Http\Request;
 
 class PerangkatKelurahanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function store()
     {
-        //
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function show()
     {
-        //
+        $perangkat = PerangkatKelurahan::select('nama')->get();
+        
+        $namaArray = [];
+
+        for ($i=0; $i < count($perangkat); $i++) { 
+            array_push($namaArray, $perangkat[$i]['nama']);
+        }
+
+        return response()->json([
+            'perangkat' => $namaArray
+        ], 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function unassignedPerangkat()
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\PerangkatKelurahan  $perangkatKelurahan
-     * @return \Illuminate\Http\Response
-     */
-    public function show(PerangkatKelurahan $perangkatKelurahan)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\PerangkatKelurahan  $perangkatKelurahan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(PerangkatKelurahan $perangkatKelurahan)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PerangkatKelurahan  $perangkatKelurahan
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, PerangkatKelurahan $perangkatKelurahan)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\PerangkatKelurahan  $perangkatKelurahan
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(PerangkatKelurahan $perangkatKelurahan)
-    {
-        //
+        $perangkat = PerangkatKelurahan::select('perangkat_kelurahans.*')
+            ->join('kelurahans', 'kelurahans.lurah_id', '=', 'perangkat_kelurahans.id')
+            ->get();
+        
+        return response()->json([
+            'perangkat' => $perangkat
+        ], 200);
     }
 }

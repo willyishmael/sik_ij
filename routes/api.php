@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PendudukController;
 use App\Http\Controllers\KelurahanController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PerangkatKelurahanController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -46,4 +47,7 @@ Route::post('/penduduk/update', [PendudukController::class,'update']);
 Route::post('/penduduk/delete', [PendudukController::class,'delete']);
 
 Route::post('/kelurahan/show', [KelurahanController::class,'show']);
-Route::post('/kelurahan/update', [KelurahanController::class,'update']);
+Route::post('/kelurahan/update/profil', [KelurahanController::class,'updateProfil']);
+Route::post('/kelurahan/update/lurah', [KelurahanController::class,'updateLurah']);
+Route::post('/kelurahan/update/sekretaris', [KelurahanController::class,'updateSekretaris']);
+Route::get('/kelurahan/perangkat', [PerangkatKelurahanController::class,'show']);

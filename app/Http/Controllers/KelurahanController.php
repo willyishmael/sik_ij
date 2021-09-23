@@ -27,46 +27,84 @@ class KelurahanController extends Controller
     }
 
 
-    public function update(Request $request)
+    public function updateProfil(Request $request)
     {
         Validator::make($request->all(), [
             'remember_token' => 'required',
-            'alamat_kantor' => 'required',
+            'alamat_kantor' => 'required|email',
             'telepon_kelurahan' => 'required',
             'email_kelurahan' => 'required',
-            'nama_lurah' => 'required',
-            'nip_lurah' => 'required',
-            'email_lurah' => 'required',
-            'nomor_telepon_lurah' => 'required',
-            'nama_sekretaris' => 'required',
-            'nip_sekretaris' => 'required',
-            'email_sekretaris' => 'required',
-            'nomor_telepon_sekretaris' => 'required',
+        ], [
+            'required' => 'The attribute field is required.'
         ]);
 
         $kelurahan_id = User::where('remember_token', $request->remember_token)->first()['kelurahan_id'];
 
-        $kelurahan = Kelurahan::where('id', $kelurahan_id)->first();
+        $profil = Kelurahan::where('id', $kelurahan_id)->first();
 
-        $kelurahan->alamat_kantor = $request['alamat_kantor'];
-        $kelurahan->telepon_kelurahan = $request['telepon_kelurahan'];
-        $kelurahan->email_kelurahan = $request['email_kelurahan'];
+        $profil->alamat_kantor = $request['alamat_kantor'];
+        $profil->telepon_kelurahan = $request['telepon_kelurahan'];
+        $profil->email_kelurahan = $request['email_kelurahan'];
 
-        $kelurahan->lurah->nama = $request['nama_lurah'];
-        $kelurahan->lurah->nip = $request['nip_lurah'];
-        $kelurahan->lurah->email = $request['email_lurah'];
-        $kelurahan->lurah->nomor_telepon = $request['nomor_telepon_lurah'];
-
-        $kelurahan->sekretaris->nama = $request['nama_sekretaris'];
-        $kelurahan->sekretaris->nip = $request['nip_sekretaris'];
-        $kelurahan->sekretaris->email = $request['email_sekretaris'];
-        $kelurahan->sekretaris->nomor_telepon = $request['nomor_telepon_sekretaris'];
-
-        $kelurahan->save();
+        $profil->save();
 
         return response()->json([
-            'message' => 'Update success'
+            'message' => 'Update Profil Kelurahan Success'
         ], 200);
+    }
+
+    public function updateLurah(Request $request)
+    {
+        Validator::make($request->all(), [
+            'nama_lurah' => 'required',
+            'nip_lurah' => 'required',
+            'email_lurah' => 'required',
+            'nomor_telepon_lurah' => 'required',
+        ], [
+            'required' => 'The attribute field is required.'
+        ]);
+
+        $kelurahan_id = User::where('remember_token', $request->remember_token)->first()['kelurahan_id'];
+
+        $lurah = Kelurahan::where('id', $kelurahan_id)->first();
+
+        $lurah->lurah->nama = $request['nama_lurah'];
+        $lurah->lurah->nip = $request['nip_lurah'];
+        $lurah->lurah->email = $request['email_lurah'];
+        $lurah->lurah->nomor_telepon = $request['nomor_telepon_lurah'];
+
+        $lurah->save();
+
+        return response()->json([
+            'message' => 'Update Lurah Success'
+        ], 200);
+    }
+
+    public function updateSekretaris(Request $request)
+    {
+        Validator::make($request->all(), [
+            'nama_sekretaris' => 'required',
+            'nip_sekretaris' => 'required',
+            'email_sekretaris' => 'required',
+            'nomor_telepon_sekretaris' => 'required',
+        ], [
+            'required' => 'The attribute field is required.'
+        ]);
+
+            $kelurahan_id = User::where('remember_token', $request->remember_token)->first()['kelurahan_id'];
+            
+            $sekretaris = Kelurahan::where('id', $kelurahan_id)->first();
+            
+            $sekretaris->sekretaris->nama = $request['nama_sekretaris'];
+            $sekretaris->sekretaris->nip = $request['nip_sekretaris'];
+            $sekretaris->sekretaris->email = $request['email_sekretaris'];
+            $sekretaris->sekretaris->nomor_telepon = $request['nomor_telepon_sekretaris'];
+
+            $sekretaris->save();
+            
+            return response()->json([
+                'message' => 'Update Sekretaris Success'
+            ], 200);
     }
 
 }

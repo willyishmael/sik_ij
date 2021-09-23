@@ -17,7 +17,6 @@ class CreatePenduduksTable extends Migration
             $table->id();
             $table->string("nama");
             $table->foreignId('bangunan_id')->constrained('bangunans');
-            $table->foreignId('kelurahan_id')->constrained('kelurahans');
             $table->string("tempat_lahir");
             $table->date("tanggal_lahir");
             $table->string("nomor_kk")->unique();

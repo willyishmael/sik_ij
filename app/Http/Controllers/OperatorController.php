@@ -115,39 +115,6 @@ class OperatorController extends Controller
             ], 200);
         }
     }
-
-    public function storePemilik(Request $request) {
-
-        $request->validate([
-            'nama' => 'required',
-            'nik' => 'required',
-        ]);
-
-        $new_pemilik = Pemilik::create([
-            'nama' => $request->nama,
-            'nik' => $request->nik,
-        ]);
-
-        $saved = $new_pemilik->save();
-        
-        if(!$saved){
-            Pemilik::abort(500, 'Error');
-        } else {
-            return response()->json([
-                'message' => 'Success Menambahkan Data',
-            ], 200);
-        }
-
-    }
-
-    public function update() {
-
-    }
-
-    public function destroy() {
-
-    }
-
     
     
 }

@@ -16,7 +16,10 @@ class PendudukController extends Controller
         ]);
 
         $kelurahan_id = User::where('remember_token', $request->remember_token)->first()['kelurahan_id'];
-        $penduduk = Penduduk::where('kelurahan_id', $kelurahan_id)->get();
+
+        $penduduk = Penduduk::select('penduduks.*')
+            ->join('bangunans', 'penduduks.bangunan_id', '=', 'bangunans.id')
+            ->where('bangunans.kelurahan_id', $kelurahan_id)->get();
 
         return response()->json([
             'remember_token' => $request->remember_token,

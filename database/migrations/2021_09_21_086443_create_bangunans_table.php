@@ -16,7 +16,8 @@ class CreateBangunansTable extends Migration
         Schema::create('bangunans', function (Blueprint $table) {
             $table->id();
             $table->string("nomor_bangunan");
-            $table->foreignId("pemilik_id")->constrained('pemiliks');
+            $table->string("nama_pemilik");
+            $table->string("nik_pemilik")->unique();
             $table->foreignId("kelurahan_id")->constrained('kelurahans');
             $table->string("lingkungan");
             $table->string("alamat");
@@ -24,11 +25,6 @@ class CreateBangunansTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('rumahs');
