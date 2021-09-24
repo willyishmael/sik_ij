@@ -40,6 +40,7 @@ Route::get('/auth', [AuthController::class, 'checkUserToken']);
 Route::get('/test', [OperatorController::class, 'test']);
 
 Route::get('/penduduk/show', [PendudukController::class, 'show']);
+Route::get('/penduduk/update', [PendudukController::class, 'update']);
 
 
 Route::get('/kelurahan/perangkat', [PerangkatKelurahanController::class, 'show']);

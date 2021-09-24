@@ -40,11 +40,13 @@ class PendudukController extends Controller
     }
 
     public function create(Request $request) {
+        Validator::make($request->all(), [
+            'remember_token' => 'required'
+        ]);
 
         $request->validate([
             'nama' => 'required',
-            'rumah_id' => 'required',
-            'kelurahan_id' => 'required',
+            'bangunan_id' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
             'nomor_kk' => 'required',
@@ -57,8 +59,7 @@ class PendudukController extends Controller
 
         $new_penduduk = Penduduk::create([
             'nama' => $request->nama,
-            'rumah_id' => $request->rumah_id,
-            'kelurahan_id' => $request->kelurahan_id,
+            'bangunan_id' => $request->bangunan_id,
             'tempat_lahir' => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,
             'nomor_kk' => $request->nomor_kk,
@@ -83,19 +84,22 @@ class PendudukController extends Controller
 
     public function update(Request $request)
     {
-        $penduduk = Penduduk::where('id', $request['id'])->first();
+        Validator::make($request->all(), [
+            'remember_token' => 'required'
+        ]);
 
-        $penduduk->penduduk = $request['nama'];
-        $penduduk->penduduk = $request['rumah_id'];
-        $penduduk->penduduk = $request['kelurahan_id'];
-        $penduduk->penduduk = $request['tempat_lahir'];
-        $penduduk->penduduk = $request['tanggal_lahir'];
-        $penduduk->penduduk = $request['nomor_kk'];
-        $penduduk->penduduk = $request['nik'];
-        $penduduk->penduduk = $request['nomor_telepon'];
-        $penduduk->penduduk = $request['email'];
-        $penduduk->penduduk = $request['jenis_kelamin'];
-        $penduduk->penduduk = $request['status_pernikahan'];
+        $penduduk = Penduduk::where('id', $request->id)->first();
+
+        $penduduk->nama = $request['nama'];
+        $penduduk->bangunan_id = $request['bangunan_id'];
+        $penduduk->tempat_lahir = $request['tempat_lahir'];
+        $penduduk->tanggal_lahir = $request['tanggal_lahir'];
+        $penduduk->nomor_kk = $request['nomor_kk'];
+        $penduduk->nik = $request['nik'];
+        $penduduk->nomor_telepon = $request['nomor_telepon'];
+        $penduduk->email = $request['email'];
+        $penduduk->jenis_kelamin = $request['jenis_kelamin'];
+        $penduduk->status_pernikahan = $request['status_pernikahan'];
 
         $updated = $penduduk->save();
 

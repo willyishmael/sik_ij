@@ -8,23 +8,18 @@ use Illuminate\Http\Request;
 
 class PerangkatKelurahanController extends Controller
 {
-    public function store()
-    {
-
-    }
-
     public function show()
     {
-        $perangkat = PerangkatKelurahan::select('nama')->get();
+        $perangkat = PerangkatKelurahan::select('id','nama')->get();
         
-        $namaArray = [];
+        // $namaArray = [];
 
-        for ($i=0; $i < count($perangkat); $i++) { 
-            array_push($namaArray, $perangkat[$i]['nama']);
-        }
+        // for ($i=0; $i < count($perangkat); $i++) { 
+        //     array_push($namaArray, $perangkat[$i]['nama']);
+        // }
 
         return response()->json([
-            'perangkat' => $namaArray
+            'perangkat' => $perangkat
         ], 200);
     }
 
