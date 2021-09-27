@@ -50,4 +50,4 @@ Route::post('/kelurahan/show', [KelurahanController::class,'show']);
 Route::post('/kelurahan/update/profil', [KelurahanController::class,'updateProfil']);
 Route::post('/kelurahan/update/lurah', [KelurahanController::class,'updateLurah']);
 Route::post('/kelurahan/update/sekretaris', [KelurahanController::class,'updateSekretaris']);
-Route::get('/kelurahan/perangkat', [PerangkatKelurahanController::class,'show']);
+Route::get('/kelurahan/perangkat', [PerangkatKelurahanController::class,'unassignedPerangkat']);

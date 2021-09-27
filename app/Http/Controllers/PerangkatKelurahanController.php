@@ -10,7 +10,7 @@ class PerangkatKelurahanController extends Controller
 {
     public function show()
     {
-        $perangkat = PerangkatKelurahan::select('id','nama')->get();
+        $perangkat = PerangkatKelurahan::all();
         
         // $namaArray = [];
 
@@ -25,12 +25,10 @@ class PerangkatKelurahanController extends Controller
 
     public function unassignedPerangkat()
     {
-        $perangkat = PerangkatKelurahan::select('perangkat_kelurahans.*')
-            ->join('kelurahans', 'kelurahans.lurah_id', '=', 'perangkat_kelurahans.id')
+        $perangkat = PerangkatKelurahan::select('*')
+            ->where('assigned','false')
             ->get();
         
-        return response()->json([
-            'perangkat' => $perangkat
-        ], 200);
+        return response()->json($perangkat,200);
     }
 }

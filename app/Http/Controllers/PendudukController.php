@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bangunan;
 use App\Models\Kelurahan;
 use App\Models\Penduduk;
 use App\Models\User;
@@ -12,7 +13,8 @@ class PendudukController extends Controller
 {
     public function show(Request $request) {
         Validator::make($request->all(), [
-            'remember_token' => 'required'
+            'remember_token' => 'required',
+            'kelurahan_id' => 'required'
         ]);
 
         $kelurahan_id = User::where('remember_token', $request->remember_token)->first()['kelurahan_id'];
@@ -21,30 +23,19 @@ class PendudukController extends Controller
             ->join('bangunans', 'penduduks.bangunan_id', '=', 'bangunans.id')
             ->where('bangunans.kelurahan_id', $kelurahan_id)->get();
 
+        $bangunan = Bangunan::select('id')->where('kelurahan_id',$kelurahan_id)->get();
+
         return response()->json([
             'remember_token' => $request->remember_token,
             'kelurahan_id' => $kelurahan_id,
+            'bangunan_id' => $bangunan,
             'penduduk' => $penduduk,
-        ], 200);
-    }
-    
-    public function showCount()
-    {
-        $penduduk = Penduduk::where('id', '*')->get();
-        $jumlah = $penduduk->count();
-
-        return response()->json([
-            'message' => 'Success',
-            'jumlah_penduduk' => $jumlah,
         ], 200);
     }
 
     public function create(Request $request) {
         Validator::make($request->all(), [
-            'remember_token' => 'required'
-        ]);
-
-        $request->validate([
+            'remember_token' => 'required',
             'nama' => 'required',
             'bangunan_id' => 'required',
             'tempat_lahir' => 'required',
@@ -115,6 +106,11 @@ class PendudukController extends Controller
 
     public function delete(Request $request)
     {
+
+        Validator::make($request->all(), [
+            'remember_token' => 'required'
+        ]);
+
         $penduduk = Penduduk::where('id',$request['id'])->first();
 
         $deleted = $penduduk->delete();

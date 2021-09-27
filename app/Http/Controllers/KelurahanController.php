@@ -62,10 +62,7 @@ class KelurahanController extends Controller
     {
         Validator::make($request->all(), [
             'remember_token' => 'required',
-            'nama_lurah' => 'required',
-            'nip' => 'required',
-            'email' => 'required',
-            'nomor_telepon' => 'required'
+            'nama_lurah' => 'required'
 
         ], [
             'required' => 'The attribute field is required.'
@@ -73,21 +70,36 @@ class KelurahanController extends Controller
 
         $kelurahan = $this->getKelurahan($request->remember_token);
 
-        $getLurah = $kelurahan->lurah_id;
-        $lurah = PerangkatKelurahan::where('id',$getLurah)->first();
+        $searchId = PerangkatKelurahan::where('nama',$request->nama_lurah)->first()['id'];
 
-        $lurah->nama = $request['nama_lurah'];
-        $lurah->nip = $request['nip'];
-        $lurah->email = $request['email'];
-        $lurah->nomor_telepon = $request['nomor_telepon'];
+        //change lurah assigned status
+        $currentLurah = PerangkatKelurahan::where('id',$kelurahan->lurah_id)->first();
+        $currentLurah->assigned = 0;
+        $newLurah = PerangkatKelurahan::where('id',$searchId)->first();
+        $newLurah->assigned = 1;
 
-        $saved = $lurah->save();
+        //change lurah
+        $kelurahan->lurah_id = $searchId;
+        $saved = $kelurahan->save();
+
+        // $getLurah = $kelurahan->lurah_id;
+        // $lurah = PerangkatKelurahan::where('id',$getLurah)->first();
+
+        // $lurah->nama = $request['nama_lurah'];
+        // $lurah->nip = $request['nip'];
+        // $lurah->email = $request['email'];
+        // $lurah->nomor_telepon = $request['nomor_telepon'];
+
+        // $saved = $lurah->save();
 
         if(!$saved){
             PerangkatKelurahan::abort(500, 'Error');
         } else {
+            $currentLurah->save();
+            $newLurah->save();
             return response()->json([
                 'message' => 'Update Lurah Success',
+                'lurah' => $newLurah,
             ], 200);
         }
     }
@@ -97,33 +109,43 @@ class KelurahanController extends Controller
         Validator::make($request->all(), [
             'remember_token' => 'required',
             'nama_sekretaris' => 'required',
-            'nip' => 'required',
-            'email' => 'required',
-            'nomor_telepon' => 'required'
-
         ], [
             'required' => 'The attribute field is required.'
         ]);
 
         $kelurahan = $this->getKelurahan($request->remember_token);
 
-        $getSekretaris = $kelurahan->sekretaris_id;
-        $sekretaris = PerangkatKelurahan::where('id',$getSekretaris)->first();
+        $searchId = PerangkatKelurahan::where('nama',$request->nama_sekretaris)->first()['id'];
 
-        $sekretaris->nama = $request['nama_sekretaris'];
-        $sekretaris->nip = $request['nip'];
-        $sekretaris->email = $request['email'];
-        $sekretaris->nomor_telepon = $request['nomor_telepon'];
+        //change lurah assigned status
+        $currentSekretaris = PerangkatKelurahan::where('id',$kelurahan->sekretaris_id)->first();
+        $currentSekretaris->assigned = 0;
+        $newSekretaris = PerangkatKelurahan::where('id',$searchId)->first();
+        $newSekretaris->assigned = 1;
 
-        $saved = $sekretaris->save();
+        //change lurah
+        $kelurahan->sekretaris_id = $searchId;
+        $saved = $kelurahan->save();
+
+        // $getLurah = $kelurahan->lurah_id;
+        // $lurah = PerangkatKelurahan::where('id',$getLurah)->first();
+
+        // $lurah->nama = $request['nama_lurah'];
+        // $lurah->nip = $request['nip'];
+        // $lurah->email = $request['email'];
+        // $lurah->nomor_telepon = $request['nomor_telepon'];
+
+        // $saved = $lurah->save();
 
         if(!$saved){
             PerangkatKelurahan::abort(500, 'Error');
         } else {
+            $currentSekretaris->save();
+            $newSekretaris->save();
             return response()->json([
                 'message' => 'Update Sekretaris Success',
+                'sekretaris' => $newSekretaris,
             ], 200);
         }
     }
-
 }

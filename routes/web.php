@@ -44,3 +44,5 @@ Route::get('/penduduk/update', [PendudukController::class, 'update']);
 
 
 Route::get('/kelurahan/perangkat', [PerangkatKelurahanController::class, 'show']);
+
+Route::get('/count', [DashboardController::class, 'showCount']);
