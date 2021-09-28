@@ -13,8 +13,7 @@ class PendudukController extends Controller
 {
     public function show(Request $request) {
         Validator::make($request->all(), [
-            'remember_token' => 'required',
-            'kelurahan_id' => 'required'
+            'remember_token' => 'required'
         ]);
 
         $kelurahan_id = User::where('remember_token', $request->remember_token)->first()['kelurahan_id'];

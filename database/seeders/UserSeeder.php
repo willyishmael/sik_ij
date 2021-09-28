@@ -44,5 +44,15 @@ class UserSeeder extends Seeder
             'kelurahan_id' => '3',
             'remember_token' => Str::random(10)
         ]);
+
+        User::create([
+            'name' => 'karame',
+            'email' => 'karame@gmail.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('karame'),
+            'role' => 'operator',
+            'kelurahan_id' => '4',
+            'remember_token' => Str::random(10)
+        ]);
     }
 }

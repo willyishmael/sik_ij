@@ -52,5 +52,17 @@ class KelurahanSeeder extends Seeder
             'lurah_id' => 5,
             'sekretaris_id' => 6
         ]);
+
+        Kelurahan::create([
+            'kelurahan' => 'Karame',
+            'kecamatan' => 'Singkil',
+            'kabupaten_kota' => 'Manado',
+            'provinsi' => 'Sulawesi Utara',
+            'alamat_kantor' => $faker->address(),
+            'telepon_kelurahan' => $faker->phoneNumber(),
+            'email_kelurahan' => $faker->safeEmail(),
+            'lurah_id' => 7,
+            'sekretaris_id' => 8
+        ]);
     }
 }

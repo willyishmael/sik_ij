@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PendudukController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BangunanController;
 use App\Http\Controllers\KelurahanController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\OperatorController;
@@ -46,3 +47,5 @@ Route::get('/penduduk/update', [PendudukController::class, 'update']);
 Route::get('/kelurahan/perangkat', [PerangkatKelurahanController::class, 'show']);
 
 Route::get('/count', [DashboardController::class, 'showCount']);
+
+Route::get('/bangunan/store', [BangunanController::class, 'store']);
