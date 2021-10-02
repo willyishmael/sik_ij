@@ -82,16 +82,6 @@ class KelurahanController extends Controller
         $kelurahan->lurah_id = $searchId;
         $saved = $kelurahan->save();
 
-        // $getLurah = $kelurahan->lurah_id;
-        // $lurah = PerangkatKelurahan::where('id',$getLurah)->first();
-
-        // $lurah->nama = $request['nama_lurah'];
-        // $lurah->nip = $request['nip'];
-        // $lurah->email = $request['email'];
-        // $lurah->nomor_telepon = $request['nomor_telepon'];
-
-        // $saved = $lurah->save();
-
         if(!$saved){
             PerangkatKelurahan::abort(500, 'Error');
         } else {
@@ -117,25 +107,13 @@ class KelurahanController extends Controller
 
         $searchId = PerangkatKelurahan::where('nama',$request->nama_sekretaris)->first()['id'];
 
-        //change lurah assigned status
         $currentSekretaris = PerangkatKelurahan::where('id',$kelurahan->sekretaris_id)->first();
         $currentSekretaris->assigned = 0;
         $newSekretaris = PerangkatKelurahan::where('id',$searchId)->first();
         $newSekretaris->assigned = 1;
 
-        //change lurah
         $kelurahan->sekretaris_id = $searchId;
         $saved = $kelurahan->save();
-
-        // $getLurah = $kelurahan->lurah_id;
-        // $lurah = PerangkatKelurahan::where('id',$getLurah)->first();
-
-        // $lurah->nama = $request['nama_lurah'];
-        // $lurah->nip = $request['nip'];
-        // $lurah->email = $request['email'];
-        // $lurah->nomor_telepon = $request['nomor_telepon'];
-
-        // $saved = $lurah->save();
 
         if(!$saved){
             PerangkatKelurahan::abort(500, 'Error');

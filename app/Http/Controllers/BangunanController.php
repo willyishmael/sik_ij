@@ -24,10 +24,31 @@ class BangunanController extends Controller
             $object['kelurahan_id'] = 4;
             $object['lingkungan'] = $item['lingkungan'];
             $object['alamat'] = $faker->address();
-            // $object['timestamp'] = now();
             Bangunan::insert($object);
         }
 
         return response($data);
+    }
+
+    public function show(Request $request)
+    {
+        $kelurahan_id = 4;
+
+        $bangunan = Bangunan::where('kelurahan_id',$kelurahan_id)->get();
+
+
+        for ($i=0; $i < count($bangunan); $i++) { 
+            # code...
+        }
+        $koordinat_x = Bangunan::select('koordinat_x')->where('kelurahan_id',$kelurahan_id)->first();
+        $koordinat_y = Bangunan::select('koordinat_y')->where('kelurahan_id',$kelurahan_id)->first();
+
+        $koordinat = [];
+        array_push($koordinat,$koordinat_x,$koordinat_y);
+
+        return response()->json([
+            'kelurahan_id' => $kelurahan_id,
+            'bangunan' => $koordinat,
+        ], 200);
     }
 }

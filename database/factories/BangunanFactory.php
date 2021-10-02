@@ -29,8 +29,10 @@ class BangunanFactory extends Factory
             'nama_pemilik' => $this->faker->name(),
             'nik_pemilik' => "717107".(string)rand(1000000000,9999999999),
             'kelurahan_id' => rand(2,3),
-            'lingkungan' => rand(1,15),
-            'alamat' => $this->faker->address()
+            'lingkungan' => "00".(string)rand(1,9),
+            'alamat' => $this->faker->address(),
+            'koordinat_x' => 0.0,
+            'koordinat_y' => 0.0
         ];
     }
 }

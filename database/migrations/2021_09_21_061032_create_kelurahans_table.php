@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateKelurahansTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('kelurahans', function (Blueprint $table) {
@@ -28,11 +23,6 @@ class CreateKelurahansTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('kelurahans');

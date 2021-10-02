@@ -6,6 +6,7 @@ use App\Models\Bangunan;
 use App\Models\Kelurahan;
 use App\Models\Pemilik;
 use App\Models\Penduduk;
+use Faker\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
@@ -23,6 +24,60 @@ class OperatorController extends Controller
         }
         
         return response()->json($response, 200);
+    }
+
+    public function test2() {
+      
+        $faker = Factory::create();
+        $data = Http::get('http://geoportal.manadokota.go.id/geoserver/wfs?srsName=EPSG%3A4326&typename=geonode%3Akelurahan_karame_kecsingkil_1&outputFormat=json&version=1.0.0&service=WFS&request=GetFeature&access_token=oSi0KWhuVqDEv3Ati0nJeTAZBBmM2E')['features'];
+        
+        for ($i=0; $i < count($data); $i++) { 
+            $item = $data[$i]['properties'];
+            $object = [];
+            $object['nomor_bangunan'] = $item['no_bng'];
+            $object['nama_pemilik'] = $faker->name();
+            $object['nik_pemilik'] = "717107".(string)rand(1000000000,9999999999);
+            $object['kelurahan_id'] = 4;
+            $object['lingkungan'] = $item['lingkungan'];
+            $object['alamat'] = $faker->address();
+            $object['created_at'] = now();
+            $object['updated_at'] = now();
+            Bangunan::insert($object);
+        }
+
+        return response($data);
+    }
+
+    public function test3() {
+        
+        $faker = Factory::create();
+        $path = 'D:\Productivity\Programming\application\sik-ij\savefile\karame_center_coordinates.json';
+        $content = json_decode(file_get_contents($path), true);
+        $data = $content['features'];
+
+        dd(count($content));
+
+        for ($i=0; $i < count($content); $i++) {
+            $item = $data[$i]['attributes'];
+            $coordinate = $data[$i]['geometry'];
+            $coorX = $coordinate['x'];
+            $coorY = $coordinate['y'];
+
+            $object = [];
+            $object['nomor_bangunan'] = $item['no_bng'];
+            $object['nama_pemilik'] = $faker->name();
+            $object['nik_pemilik'] = "717107".(string)rand(1000000000,9999999999);
+            $object['kelurahan_id'] = 4;
+            $object['lingkungan'] = "001";
+            $object['alamat'] = $faker->address();
+            $object['koordinat_x'] = $coorX;
+            $object['koordinat_y'] = $coorY;
+            $object['created_at'] = now();
+            $object['updated_at'] = now();
+            Bangunan::insert($object);
+        }
+
+        return response($data);
     }
 
     public function storePenduduk(Request $request) {

@@ -24,21 +24,13 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 
 Route::get('/logout', [LogoutController::class, 'logout'])->middleware('auth');
 
-Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
-    Route::get('/', 'HomeController@index')->name('admin_dashboard');
-});
-
-Route::group(['middleware' => ['auth', 'user'], 'prefix' => 'user'], function () {
-    Route::get('/', 'HomeController@index')->name('user_dashboard');
-});
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/penduduk', [PendudukController::class,'jumlahPendudukKelurahan'])->middleware('auth');
 Route::get('/kelurahan', [KelurahanController::class, 'show']);
 Route::get('/auth', [AuthController::class, 'checkUserToken']);
 
-Route::get('/test', [OperatorController::class, 'test']);
+Route::get('/test3', [OperatorController::class, 'test3']);
 
 Route::get('/penduduk/show', [PendudukController::class, 'show']);
 Route::get('/penduduk/update', [PendudukController::class, 'update']);
@@ -48,4 +40,6 @@ Route::get('/kelurahan/perangkat', [PerangkatKelurahanController::class, 'show']
 
 Route::get('/count', [DashboardController::class, 'showCount']);
 
-Route::get('/bangunan/store', [BangunanController::class, 'store']);
+Route::get('/store', [BangunanController::class, 'store']);
+
+Route::get('/show', [BangunanController::class, 'show']);

@@ -21,6 +21,8 @@ class CreateBangunansTable extends Migration
             $table->foreignId("kelurahan_id")->constrained('kelurahans');
             $table->string("lingkungan");
             $table->string("alamat");
+            $table->decimal("koordinat_x");
+            $table->decimal("koordinat_y");
             $table->timestamps();
         });
     }
