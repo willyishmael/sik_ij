@@ -30,7 +30,7 @@ Route::get('/penduduk', [PendudukController::class,'jumlahPendudukKelurahan'])->
 Route::get('/kelurahan', [KelurahanController::class, 'show']);
 Route::get('/auth', [AuthController::class, 'checkUserToken']);
 
-Route::get('/test3', [OperatorController::class, 'test3']);
+Route::get('/test', [OperatorController::class, 'test4']);
 
 Route::get('/penduduk/show', [PendudukController::class, 'show']);
 Route::get('/penduduk/update', [PendudukController::class, 'update']);

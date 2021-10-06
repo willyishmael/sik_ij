@@ -9,6 +9,10 @@ class Bangunan extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
+    public $incrementing = false;
+
     public function penghuni() {
         $this->hasMany(Penduduk::class, 'rumah_id', 'id');
     }

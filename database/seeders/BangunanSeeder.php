@@ -21,7 +21,9 @@ class BangunanSeeder extends Seeder
       
         for ($i=0; $i < count($data); $i++) { 
             $item = $data[$i]['properties'];
+            $id = $data[$i]['id'];
             $object = [];
+            $object['id'] = $id;
             $object['nomor_bangunan'] = $item['no_bng'];
             $object['nama_pemilik'] = $faker->name();
             $object['nik_pemilik'] = "717107".(string)rand(1000000000,9999999999);

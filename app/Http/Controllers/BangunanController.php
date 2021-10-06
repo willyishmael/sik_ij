@@ -6,56 +6,58 @@ use App\Models\Bangunan;
 use App\Models\Kelurahan;
 use App\Models\Penduduk;
 use App\Models\User;
-use Faker\Factory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
-use PhpParser\Node\Expr\Cast\Object_;
 
 class BangunanController extends Controller
 {
-    public function store()
+    private function bangunan_id(string $remember_token, int $bangunan_id)
     {
-        $faker = Factory::create();
-        $data = Http::get('http://geoportal.manadokota.go.id/geoserver/wfs?srsName=EPSG%3A4326&typename=geonode%3Akelurahan_karame_kecsingkil_1&outputFormat=json&version=1.0.0&service=WFS&request=GetFeature&access_token=oSi0KWhuVqDEv3Ati0nJeTAZBBmM2E')['features'];
-        
-        for ($i=0; $i < count($data); $i++) { 
-            $item = $data[$i]['properties'];
-            $object = [];
-            $object['nomor_bangunan'] = $item['no_bng'];
-            $object['nama_pemilik'] = $faker->name();
-            $object['nik_pemilik'] = "717107".(string)rand(1000000000,9999999999);
-            $object['kelurahan_id'] = 4;
-            $object['lingkungan'] = $item['lingkungan'];
-            $object['alamat'] = $faker->address();
-            Bangunan::insert($object);
-        }
+        $kelurahan_id = User::where('remember_token', $remember_token)->first()['kelurahan_id'];
+        $kelurahan = Kelurahan::where('id', $kelurahan_id)->first()['kelurahan'];
+        $prefix = 'kelurahan_'.$kelurahan.'_kecsingkil_1.';
+        $new_bangunan_id = $prefix.$bangunan_id;
 
-        return response($data);
+        return $new_bangunan_id;
+    }
+
+    private function bangunanPenghuni(string $bangunan_id)
+    {
+        $bangunan = Bangunan::where('id', $bangunan_id)->first();
+        $penghuni = Penduduk::where('bangunan_id', $bangunan_id)->get();
+        return response()->json([
+            'bangunan' => $bangunan,
+            'penghuni' => $penghuni
+        ], 200);
     }
 
     public function show(Request $request)
     {
         Validator::make($request->all(), [
             'remember_token' => 'required',
+            'bangunan_id' => 'required'
         ], [
             'required' => 'The attribute field is required.'
         ]);
 
-        $kelurahan_id = User::where('remember_token', $request->remember_token)->first()['kelurahan_id'];
+        // $request->bangunan_id = 3;
 
-        // $kelurahan_id = 4;
+        $bangunan_id = $this->bangunan_id($request->remember_token, $request->bangunan_id);
 
-        $bangunan = Bangunan::select('nomor_bangunan','nama_pemilik','nik_pemilik')->where('kelurahan_id',$kelurahan_id)->get();
+        $this->bangunanPenghuni($bangunan_id);
+    }
 
-        $penduduk = Penduduk::select('penduduks.*')
-            ->join('bangunans', 'penduduks.bangunan_id', '=', 'bangunans.id')
-            ->where('bangunans.kelurahan_id', $kelurahan_id)->get();
+    public function search(Request $request)
+    {
+        Validator::make($request->all(), [
+            'remember_token' => 'required',
+            'nik' => 'required'
+        ], [
+            'required' => 'The attribute field is required.'
+        ]);
 
-        return response()->json([
-            'kelurahan_id' => $kelurahan_id,
-            'bangunan' => $bangunan,
-            'penduduk' => $penduduk
-        ], 200);
+        $bangunan_id = Penduduk::where('nik', $request->nik)->first['bangunan_id'];
+
+        $this->bangunanPenghuni($bangunan_id);
     }
 }

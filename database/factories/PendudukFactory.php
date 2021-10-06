@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Bangunan;
 use App\Models\Penduduk;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -26,7 +27,7 @@ class PendudukFactory extends Factory
         
         return [
             'nama' => $this->faker->name(),
-            'bangunan_id' => rand(580,670),
+            'bangunan_id' => Bangunan::all()->random()['id'],
             'tempat_lahir' => $this->faker->city(),
             'tanggal_lahir' => $this->faker->date(),
             'nomor_kk' => "717107".(string)rand(1000000000,9999999999),

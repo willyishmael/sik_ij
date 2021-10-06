@@ -14,9 +14,11 @@ class CreatePenduduksTable extends Migration
     public function up()
     {
         Schema::create('penduduks', function (Blueprint $table) {
+            $table->engine = 'innoDB';
             $table->id();
             $table->string("nama");
-            $table->foreignId('bangunan_id')->constrained('bangunans');
+            $table->string('bangunan_id')->index();
+            $table->foreign('bangunan_id')->references('id')->on('bangunans');
             $table->string("tempat_lahir");
             $table->date("tanggal_lahir");
             $table->string("nomor_kk")->unique();

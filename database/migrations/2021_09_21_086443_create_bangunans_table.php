@@ -14,7 +14,7 @@ class CreateBangunansTable extends Migration
     public function up()
     {
         Schema::create('bangunans', function (Blueprint $table) {
-            $table->id();
+            $table->string('id')->primary();
             $table->string("nomor_bangunan");
             $table->string("nama_pemilik");
             $table->string("nik_pemilik")->unique();

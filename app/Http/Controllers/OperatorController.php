@@ -90,7 +90,7 @@ class OperatorController extends Controller
             'no_kk' => 'required'|'unique',
             'nik' => 'required'|'unique',
             'no_telp' => 'required',
-            'email' => 'required',
+            'email' => 'required', 
             'jenis_kelamin' => 'required',
             'status_pernikahan' => 'required',   
         ]);
@@ -169,6 +169,13 @@ class OperatorController extends Controller
                 'message' => 'Success Menambahkan Data',
             ], 200);
         }
+    }
+
+    public function test4()
+    {
+        $a = Bangunan::select('*')->get();
+
+        return $a;
     }
     
     
