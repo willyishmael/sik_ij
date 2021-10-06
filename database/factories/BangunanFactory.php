@@ -5,8 +5,7 @@ namespace Database\Factories;
 use App\Models\Bangunan;
 use App\Models\Pemilik;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
-
+use Illuminate\Support\Facades\DB;
 
 class BangunanFactory extends Factory
 {
@@ -24,6 +23,9 @@ class BangunanFactory extends Factory
      */
     public function definition()
     {
+        // $rand = rand(1,99);
+        // $rand2 = rand(1,99);
+
         return [
             'nomor_bangunan' => rand(1,99),
             'nama_pemilik' => $this->faker->name(),
@@ -31,8 +33,7 @@ class BangunanFactory extends Factory
             'kelurahan_id' => rand(2,3),
             'lingkungan' => "00".(string)rand(1,9),
             'alamat' => $this->faker->address(),
-            'koordinat_x' => 0.0,
-            'koordinat_y' => 0.0
+            // 'koordinat' => DB::raw("(GeomFromText('POINT($rand $rand2)'))"),
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BangunanController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PendudukController;
 use App\Http\Controllers\KelurahanController;
@@ -54,3 +55,5 @@ Route::post('/kelurahan/update/profil', [KelurahanController::class,'updateProfi
 Route::post('/kelurahan/update/lurah', [KelurahanController::class,'updateLurah']);
 Route::post('/kelurahan/update/sekretaris', [KelurahanController::class,'updateSekretaris']);
 Route::get('/kelurahan/perangkat', [PerangkatKelurahanController::class,'unassignedPerangkat']);
+
+Route::post('/bangunan', [BangunanController::class,'show']);

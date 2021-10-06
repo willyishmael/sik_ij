@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bangunan;
+use App\Models\Kelurahan;
+use App\Models\Penduduk;
+use App\Models\User;
 use Faker\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Validator;
 use PhpParser\Node\Expr\Cast\Object_;
 
 class BangunanController extends Controller
@@ -32,23 +36,26 @@ class BangunanController extends Controller
 
     public function show(Request $request)
     {
-        $kelurahan_id = 4;
+        Validator::make($request->all(), [
+            'remember_token' => 'required',
+        ], [
+            'required' => 'The attribute field is required.'
+        ]);
 
-        $bangunan = Bangunan::where('kelurahan_id',$kelurahan_id)->get();
+        $kelurahan_id = User::where('remember_token', $request->remember_token)->first()['kelurahan_id'];
 
+        // $kelurahan_id = 4;
 
-        for ($i=0; $i < count($bangunan); $i++) { 
-            # code...
-        }
-        $koordinat_x = Bangunan::select('koordinat_x')->where('kelurahan_id',$kelurahan_id)->first();
-        $koordinat_y = Bangunan::select('koordinat_y')->where('kelurahan_id',$kelurahan_id)->first();
+        $bangunan = Bangunan::select('nomor_bangunan','nama_pemilik','nik_pemilik')->where('kelurahan_id',$kelurahan_id)->get();
 
-        $koordinat = [];
-        array_push($koordinat,$koordinat_x,$koordinat_y);
+        $penduduk = Penduduk::select('penduduks.*')
+            ->join('bangunans', 'penduduks.bangunan_id', '=', 'bangunans.id')
+            ->where('bangunans.kelurahan_id', $kelurahan_id)->get();
 
         return response()->json([
             'kelurahan_id' => $kelurahan_id,
-            'bangunan' => $koordinat,
+            'bangunan' => $bangunan,
+            'penduduk' => $penduduk
         ], 200);
     }
 }
