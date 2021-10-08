@@ -52,4 +52,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsTo(Kelurahan::class, 'kelurahan_id', 'id');
     }
 
+    public function checkRememberToken(string $remember_token) {
+        $userIsExist = $this->where('remember_token', $remember_token)->first() != null;
+        return $userIsExist;
+    }
+
 }

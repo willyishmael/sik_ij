@@ -56,4 +56,5 @@ Route::post('/kelurahan/update/lurah', [KelurahanController::class,'updateLurah'
 Route::post('/kelurahan/update/sekretaris', [KelurahanController::class,'updateSekretaris']);
 Route::get('/kelurahan/perangkat', [PerangkatKelurahanController::class,'unassignedPerangkat']);
 
-Route::post('/bangunan', [BangunanController::class,'show']);
+Route::post('/bangunan/map', [BangunanController::class,'map']);
+Route::post('/bangunan/search', [BangunanController::class,'search']);

@@ -30,7 +30,7 @@ Route::get('/penduduk', [PendudukController::class,'jumlahPendudukKelurahan'])->
 Route::get('/kelurahan', [KelurahanController::class, 'show']);
 Route::get('/auth', [AuthController::class, 'checkUserToken']);
 
-Route::get('/test', [OperatorController::class, 'test4']);
+Route::get('/test', [BangunanController::class, 'table']);
 
 Route::get('/penduduk/show', [PendudukController::class, 'show']);
 Route::get('/penduduk/update', [PendudukController::class, 'update']);
@@ -42,4 +42,6 @@ Route::get('/count', [DashboardController::class, 'showCount']);
 
 Route::get('/store', [BangunanController::class, 'store']);
 
-Route::get('/show', [BangunanController::class, 'show']);
+Route::get('/search', [BangunanController::class, 'search']);
+
+Route::get('/bangunan/map', [BangunanController::class,'map']);
