@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Authenticatable
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use Authenticatable, CanResetPassword;
+
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -30,7 +33,6 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
     ];
 
     /**
@@ -42,43 +44,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function role() {
-        return $this->belongsTo(Role::class, 'role_id', 'id');
-    }
+    // public function role() {
+    //     return $this->belongsTo(Role::class, 'role_id', 'id');
+    // }
 
     public function kelurahan() {
-        return $this->belongsTo(Role::class, 'kelurahan_id', 'id');
+        return $this->belongsTo(Kelurahan::class, 'kelurahan_id', 'id');
     }
 
-    public function authorizeRoles($roles)
-    {
-      if ($this->hasAnyRole($roles)) {
-        return true;
-      }
-      abort(401, 'This action is unauthorized.');
+    public function checkRememberToken(string $remember_token) {
+        $userIsExist = $this->where('remember_token', $remember_token)->first() != null;
+        return $userIsExist;
     }
 
-    public function hasAnyRole($roles)
-    {
-      if (is_array($roles)) {
-        foreach ($roles as $role) {
-          if ($this->hasRole($role)) {
-            return true;
-          }
-        }
-      } else {
-        if ($this->hasRole($roles)) {
-          return true;
-        }
-      }
-      return false;
-    }
-
-    public function hasRole($role)
-    {
-      if ($this->role()->where('rolename', $role)->first()) {
-        return true;
-      }
-      return false;
-    }
 }

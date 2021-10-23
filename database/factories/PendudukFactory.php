@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Bangunan;
 use App\Models\Penduduk;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,18 +23,19 @@ class PendudukFactory extends Factory
     public function definition()
     {
         $status_pernikahan = ['Belum Menikah','Sudah Menikah','Janda/Duda'];
+        $jenis_kelamin = ['Laki-laki','Perempuan'];
         
         return [
             'nama' => $this->faker->name(),
-            'rumah_id' => rand(1,10),
+            'bangunan_id' => Bangunan::all()->random()['id'],
             'tempat_lahir' => $this->faker->city(),
             'tanggal_lahir' => $this->faker->date(),
+            'nomor_kk' => "717107".(string)rand(1000000000,9999999999),
             'nik' => "717107".(string)rand(1000000000,9999999999),
-            'no_telp' => $this->faker->phoneNumber(),
-            'email' => $this->faker->unique()->safeEmail(),
-            'jenis_kelamin' => rand(0,1),
+            'nomor_telepon' => $this->faker->phoneNumber(),
+            'email' => $this->faker->safeEmail(),
+            'jenis_kelamin' => $jenis_kelamin[rand(0,1)],
             'status_pernikahan' => $status_pernikahan[rand(0,2)],
-            'kepala_keluarga_id' => rand(1,10),        
         ];
     }
 }

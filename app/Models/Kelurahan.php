@@ -18,10 +18,10 @@ class Kelurahan extends Model
     }
 
     public function lurah() {
-        return $this->belongsTo(Penduduk::class, 'lurah_id', 'id');
+        return $this->belongsTo(PerangkatKelurahan::class, 'lurah_id', 'id');
     }
 
     public function sekretaris() {
-        return $this->belongsto(Penduduk::class, 'sekretaris_id', 'id');
+        return $this->belongsto(PerangkatKelurahan::class, 'sekretaris_id', 'id');
     }
 }

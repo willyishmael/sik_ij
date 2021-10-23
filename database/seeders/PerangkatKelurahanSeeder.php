@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Penduduk;
+use App\Models\PerangkatKelurahan;
 use Illuminate\Database\Seeder;
 
-class PendudukSeeder extends Seeder
+class PerangkatKelurahanSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,8 +14,8 @@ class PendudukSeeder extends Seeder
      */
     public function run()
     {
-        Penduduk::factory()
-            ->count(1000)
+        PerangkatKelurahan::factory()
+            ->count(10)
             ->create();
     }
 }

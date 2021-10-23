@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Pemilik;
+use App\Models\PerangkatKelurahan;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class PemilikFactory extends Factory
+class PerangkatKelurahanFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Pemilik::class;
+    protected $model = PerangkatKelurahan::class;
 
     /**
      * Define the model's default state.
@@ -23,7 +23,10 @@ class PemilikFactory extends Factory
     {
         return [
             'nama' => $this->faker->name(),
-            'nik' => "717107".(string)rand(1000000000,9999999999),
+            'nip' => rand(100000000000,9999999999),
+            'email' => $this->faker->safeEmail(),
+            'nomor_telepon' => $this->faker->phoneNumber(),
+            'assigned' => false,
         ];
     }
 }

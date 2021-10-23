@@ -2,18 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pemilik extends Model
+class PerangkatKelurahan extends Model
 {
     use HasFactory;
 
     protected $guarded = [
-        'id',
+        'id'
     ];
 
-    public function rumah() {
-        $this->hasMany(Rumah::class, 'pemilik_id', 'id');
-    }
 }

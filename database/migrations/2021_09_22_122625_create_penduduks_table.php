@@ -14,17 +14,19 @@ class CreatePenduduksTable extends Migration
     public function up()
     {
         Schema::create('penduduks', function (Blueprint $table) {
+            $table->engine = 'innoDB';
             $table->id();
             $table->string("nama");
-            $table->foreignId('rumah_id')->constrained('rumahs');
+            $table->string('bangunan_id')->index();
+            $table->foreign('bangunan_id')->references('id')->on('bangunans');
             $table->string("tempat_lahir");
             $table->date("tanggal_lahir");
+            $table->string("nomor_kk")->unique();
             $table->string("nik")->unique();
-            $table->string("no_telp")->unique();
-            $table->string("email")->unique();
-            $table->boolean("jenis_kelamin");
+            $table->string("nomor_telepon");
+            $table->string("email")->nullable();
+            $table->string("jenis_kelamin");
             $table->string("status_pernikahan");
-            $table->unsignedBigInteger("kepala_keluarga_id")->nullable();
             $table->timestamps();
         });
     }
