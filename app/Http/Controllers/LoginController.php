@@ -8,6 +8,8 @@ use App\Models\Penduduk;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 
 class LoginController extends Controller
 {
@@ -48,6 +50,4 @@ class LoginController extends Controller
         }
 
     }
-
-    
 }

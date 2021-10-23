@@ -9,35 +9,13 @@ use App\Http\Controllers\KelurahanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PerangkatKelurahanController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-// Route::middleware('auth')->group(function () {
-//     Route::prefix('/admin')->name('')->group(function() {
-//         Route::get('/', [AdminController::class, '']);
-//     });
-
-//     Route::prefix('/operator')->name('')->group(function() {
-//         Route::post('/datapenduduk', [OperatorController::class, 'store'])->name('store');
-//         Route::put('/datapenduduk', [OperatorController::class, 'update'])->name('update');
-//         Route::delete('/datapenduduk', [OperatorController::class, 'destroy'])->name('destroy');
-//     });
-
-// });
 
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::get('/logout', [LogoutController::class, 'logout']);
